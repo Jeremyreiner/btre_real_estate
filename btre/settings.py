@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'pages',
     'listings',
     'realtors',
+    'accounts',
+    'contacts'
     
 ]
 
@@ -140,3 +142,8 @@ try:
     from .local_settings import *
 except ImportError:
     raise Exception('You must have a local_settings.py to run this project')
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}

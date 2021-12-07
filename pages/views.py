@@ -13,7 +13,7 @@ def index(request):
         'state_choices': state_choices,
         'price_choices': price_choices,
     }
-    return render(request, '../templates/home.html', context)
+    return render(request, 'pages/home.html', context)
 
 
 def about(request):
@@ -24,4 +24,4 @@ def about(request):
         'realtors': realtors,
         'mvp_realtors': mvp_realtors,
     }
-    return render(request, '../templates/about.html', context)
+    return render(request, 'pages/about.html', context)
