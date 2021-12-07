@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib import auth
 from django.contrib.auth.models import User
-
+from django.contrib.auth import authenticate
 from contacts.models import Contact
 # Create your views here.
 
@@ -34,9 +34,16 @@ def register(request):
                         last_name=last_name
                     )
                     user.save()
-                    messages.success(request, 'You are now registered and can log in')
-                    #REMEMBER TO USE A SIGNAL FOR AUTO LOG IN
-                    return redirect('login')
+                    user = authenticate(username= username, password=password2)
+                    if user is not None:
+                        print('User is authenticated')
+                        login(request)
+                        messages.success(request, 'You are now registered and can log in')
+                        #REMEMBER TO USE A SIGNAL FOR AUTO LOG IN
+                        return redirect('index')
+                    else:
+                        print('user is NOT authenticated')
+                        return redirect('register')
         else:
             messages.error(request, 'Your passwords did not match')
             return redirect('register')
